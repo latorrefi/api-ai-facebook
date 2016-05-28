@@ -27,24 +27,13 @@ function processEvent(event) {
         if (!sessionIds.has(sender)) {
             sessionIds.set(sender, uuid.v1());
         }
-var userName;
-            if(event.sender.id){
-userName = event.sender.id;
-            }
 
         console.log("Text", text);
+
         let apiaiRequest = apiAiService.textRequest(text,
-{
-sessionId: sessionIds.get(sender),
-contexts: [
-{
-name: "generic",
-parameters: {
-facebook_user: userName
-}
-}
-]
-});
+            {
+                sessionId: sessionIds.get(sender)
+            });
 
         apiaiRequest.on('response', (response) => {
             if (isDefined(response.result)) {
