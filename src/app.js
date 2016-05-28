@@ -27,6 +27,10 @@ function processEvent(event) {
         if (!sessionIds.has(sender)) {
             sessionIds.set(sender, uuid.v1());
         }
+var userName;
+            if(event.sender.id){
+userName = event.sender.id;
+            }
 
         console.log("Text", text);
         let apiaiRequest = apiAiService.textRequest(text,
