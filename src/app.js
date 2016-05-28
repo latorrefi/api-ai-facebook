@@ -19,12 +19,16 @@ const sessionIds = new Map();
 
 function processEvent(event) {
     var sender = event.sender.id.toString();
+    
+    console.log("Sender", event);
 
     if (event.message && event.message.text) {
+        console.log("Message exist");
         var text = event.message.text;
         // Handle a text message from this sender
 
         if (!sessionIds.has(sender)) {
+            console.log("Sender exist");
             sessionIds.set(sender, uuid.v1());
         }
 
@@ -37,6 +41,7 @@ function processEvent(event) {
 
         apiaiRequest.on('response', (response) => {
             if (isDefined(response.result)) {
+                console.log("Result exist");
                 let responseText = response.result.fulfillment.speech;
                 let responseData = response.result.fulfillment.data;
                 let action = response.result.action;
