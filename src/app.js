@@ -30,13 +30,21 @@ function processEvent(event) {
         if (!sessionIds.has(sender)) {
             console.log("Sender exist");
             sessionIds.set(sender, uuid.v1());
+            userId = sender;
         }
 
         console.log("Text", text);
 
         let apiaiRequest = apiAiService.textRequest(text,
             {
-                sessionId: sessionIds.get(sender)
+                sessionId: sessionIds.get(sender),
+                        contexts: [
+{
+name: "general",
+parameters: {
+user_id: userId
+}
+}]
             });
 
         apiaiRequest.on('response', (response) => {
