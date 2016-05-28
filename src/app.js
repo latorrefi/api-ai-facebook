@@ -43,6 +43,7 @@ parameters: {
 facebook_user: userName
 }
 }
+]
 });
 
         apiaiRequest.on('response', (response) => {
